@@ -154,6 +154,14 @@
   border-radius: 6px;
   padding: 6px;
   text-align: center;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.campo-numero::-webkit-outer-spin-button,
+.campo-numero::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .campo-numero:focus {

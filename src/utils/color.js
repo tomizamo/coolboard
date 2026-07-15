@@ -29,8 +29,8 @@ export function normalizeHue(h) {
 export function getAnalogous(h, s, l) {
   return [
     { h: normalizeHue(h - 60), s, l },
+    { h, s, l },
     { h: normalizeHue(h - 30), s, l },
-    { h: normalizeHue(h), s, l },
     { h: normalizeHue(h + 30), s, l },
     { h: normalizeHue(h + 60), s, l },
   ];
@@ -75,8 +75,8 @@ export function getTriad(h, s, l) {
 
 export function getSquare(h, s, l) {
   return [
-    { h, s, l },
     { h: normalizeHue(h + 90), s, l },
+    { h, s, l },
     { h: normalizeHue(h + 180), s, l },
     { h: normalizeHue(h + 270), s, l },
     { h, s, l: Math.max(l - 35, 5) },

@@ -104,10 +104,22 @@ export default function App() {
     }
   }
 
+  // Cada vez que cambiás de armonía (incluido volver a "Libre"), la paleta
+  // vuelve a la posición de arranque y el selector 1 pasa a ser el maestro.
+  // Así evitamos arrastrar mezclas raras de la armonía anterior (ej: si venís
+  // de Monocromática, los 5 quedaban con el mismo hue "pegado").
   function handleArmoniaChange(nuevaArmonia) {
     setArmonia(nuevaArmonia);
+    setSelectorActivo(1);
+
+    setHue1(0); setSaturation1(100); setLightness1(50);
+    setHue2(72); setSaturation2(100); setLightness2(50);
+    setHue3(144); setSaturation3(100); setLightness3(50);
+    setHue4(216); setSaturation4(100); setLightness4(50);
+    setHue5(288); setSaturation5(100); setLightness5(50);
+
     if (nuevaArmonia !== "ninguna") {
-      aplicarArmonia(nuevaArmonia, selectorActivo, hueActivo, saturationActiva, lightnessActiva);
+      aplicarArmonia(nuevaArmonia, 1, 0, 100, 50);
     }
   }
 
