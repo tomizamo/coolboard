@@ -1,0 +1,244 @@
+.bg {
+  --accent: #7c5cff;
+  height: 100vh;
+  background: #0d0d10;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  font-family: system-ui, "Segoe UI", sans-serif;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 56px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  border-bottom: 1px solid #232328;
+}
+
+.navbar-logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.layout {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.grilla {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.rectangulo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  justify-content: flex-end;
+  padding: 24px;
+  transition: flex 0.25s ease;
+}
+
+.rectangulo:hover {
+  flex: 1.3;
+}
+
+.rectangulo-hex {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.rectangulo-hsl {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  opacity: 0.9;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.rectangulo-hsl:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.panel-derecho {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: #16161b;
+  border-left: 1px solid #232328;
+  overflow-y: auto;
+}
+
+.wheel-wrapper {
+  flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.panel-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #8b8b95;
+  margin-bottom: 8px;
+}
+
+.color-manual {
+  width: 100%;
+}
+
+.color-manual-caja {
+  width: 100%;
+  box-sizing: border-box;
+  background: #1a1a20;
+  border: 1px solid #2a2a31;
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.campo-fila {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.campo-etiqueta {
+  width: 30px;
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #6f6f78;
+}
+
+.campo-numero {
+  width: 0;
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  background: #232328;
+  border: 1px solid #2f2f36;
+  border-radius: 6px;
+  padding: 6px;
+  text-align: center;
+}
+
+.campo-numero:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.panel-dev {
+  width: 100%;
+}
+
+.panel-dev-header {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: inherit;
+  background: #1a1a20;
+  border: 1px solid #2a2a31;
+  border-radius: 12px;
+  padding: 9px 12px;
+  cursor: pointer;
+  color: #ffffff;
+  transition: border-color 0.15s ease;
+}
+
+.panel-dev-header:hover {
+  border-color: #3a3a44;
+}
+
+.panel-dev-icono {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent);
+  background: rgba(124, 92, 255, 0.15);
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+.panel-dev-nombre {
+  flex: 1;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.panel-dev-flecha {
+  font-size: 10px;
+  color: #6f6f78;
+}
+
+.panel-dev-codigo {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 8px;
+  background: #0a0a0c;
+  border: 1px solid #2a2a31;
+  border-radius: 10px;
+  padding: 12px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 11px;
+  line-height: 145%;
+  color: #c6c6cf;
+  white-space: pre;
+}
+
+.boton-copiar-todo {
+  width: 100%;
+  margin-top: 8px;
+  font: inherit;
+  font-weight: 800;
+  font-size: 12px;
+  color: #ffffff;
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.boton-copiar-todo:hover {
+  filter: brightness(1.12);
+}

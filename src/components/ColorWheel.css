@@ -1,0 +1,74 @@
+.wheel-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.color-wheel {
+  border-radius: 50%;
+  height: 190px;
+  width: 190px;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.5);
+  touch-action: none;
+  background:
+    radial-gradient(circle closest-side, rgba(128, 128, 128, 0.5) 0%, transparent 60%),
+    conic-gradient(
+      from 90deg,
+      hsl(0, 100%, 50%),
+      hsl(60, 100%, 50%),
+      hsl(120, 100%, 50%),
+      hsl(180, 100%, 50%),
+      hsl(240, 100%, 50%),
+      hsl(300, 100%, 50%),
+      hsl(360, 100%, 50%)
+    );
+}
+
+.color-wheel-velo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: opacity 0.1s linear;
+}
+
+.lightness-slider {
+  width: 100%;
+  max-width: 190px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.armonia-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.armonia-boton {
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  color: #cfcfd6;
+  background: #232328;
+  border: 1px solid #2f2f36;
+  border-radius: 999px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.armonia-boton:hover {
+  border-color: #4a4a55;
+}
+
+.armonia-boton.activo {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}

@@ -1,0 +1,20 @@
+.campo-hex {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  background: #232328;
+  border: 1px solid #2f2f36;
+  border-radius: 6px;
+  padding: 6px 8px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.campo-hex:focus {
+  outline: none;
+  border-color: var(--accent);
+}

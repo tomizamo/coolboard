@@ -1,0 +1,21 @@
+.color-wheel-linea {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 2px;
+  background: white;
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+.color-wheel-marcador {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+  transform: translate(-50%, -50%);
+  touch-action: none;
+  cursor: grab;
+}
