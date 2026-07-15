@@ -72,3 +72,9 @@
   color: #ffffff;
   border-color: var(--accent);
 }
+
+@media (max-width: 640px) {
+  .armonia-row {
+    display: none;
+  }
+}

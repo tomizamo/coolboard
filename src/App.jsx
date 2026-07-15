@@ -44,6 +44,12 @@ export default function App() {
   const [armonia, setArmonia] = useState("ninguna");
   const [mostrarPanelDev, setMostrarPanelDev] = useState(false);
 
+  // Estado solo de la interfaz mobile (los 3 "cajones" del boceto).
+  const [formatoActivo, setFormatoActivo] = useState("hsl");
+  const [mostrarDropdownArmonia, setMostrarDropdownArmonia] = useState(false);
+  const [mostrarDropdownFormato, setMostrarDropdownFormato] = useState(false);
+  const [mostrarPopupCode, setMostrarPopupCode] = useState(false);
+
   // Valores del selector activo (el último que tocaste, por click o arrastre).
   const hueActivo =
       selectorActivo === 1 ? hue1 :
@@ -204,6 +210,27 @@ export default function App() {
     navigator.clipboard.writeText(texto);
   }
 
+  function nombreArmonia(valor) {
+    if (valor === "ninguna") return "Libre";
+    if (valor === "analoga") return "Análoga";
+    if (valor === "complementaria") return "Complementaria";
+    if (valor === "dividida") return "Dividida";
+    if (valor === "triada") return "Tríada";
+    if (valor === "cuadrada") return "Cuadrada";
+    if (valor === "monocromatica") return "Monocromática";
+    return "Sombras";
+  }
+
+  function elegirArmoniaMobile(nuevaArmonia) {
+    handleArmoniaChange(nuevaArmonia);
+    setMostrarDropdownArmonia(false);
+  }
+
+  function elegirFormatoMobile(nuevoFormato) {
+    setFormatoActivo(nuevoFormato);
+    setMostrarDropdownFormato(false);
+  }
+
   const hex1 = hslToHex(hue1, saturation1, lightness1);
   const hex2 = hslToHex(hue2, saturation2, lightness2);
   const hex3 = hslToHex(hue3, saturation3, lightness3);
@@ -290,7 +317,7 @@ export default function App() {
               />
             </div>
 
-            <div className="color-manual">
+            <div className="color-manual solo-desktop">
               <div className="panel-header">
                 <span>Color {selectorActivo}</span>
               </div>
@@ -321,7 +348,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="panel-dev">
+            <div className="panel-dev solo-desktop">
               <button className="panel-dev-header" onClick={() => setMostrarPanelDev(!mostrarPanelDev)}>
                 <span className="panel-dev-icono">{"</>"}</span>
                 <span className="panel-dev-nombre">Code</span>
@@ -336,9 +363,92 @@ export default function App() {
               )}
             </div>
 
+            {/* Solo mobile: 3 cajones (armonía, color, code) en vez de las
+                secciones de escritorio de arriba — colapsan en dropdowns/popup
+                para que entren en una pantalla chica. */}
+            <div className="mobile-controles solo-mobile">
+
+              <div className="mobile-dropdown">
+                <button className="mobile-barra" onClick={() => setMostrarDropdownArmonia(!mostrarDropdownArmonia)}>
+                  <span>{nombreArmonia(armonia)}</span>
+                  <span>▾</span>
+                </button>
+                {mostrarDropdownArmonia && (
+                    <div className="mobile-dropdown-lista">
+                      <button onClick={() => elegirArmoniaMobile("ninguna")}>Libre</button>
+                      <button onClick={() => elegirArmoniaMobile("analoga")}>Análoga</button>
+                      <button onClick={() => elegirArmoniaMobile("complementaria")}>Complementaria</button>
+                      <button onClick={() => elegirArmoniaMobile("dividida")}>Dividida</button>
+                      <button onClick={() => elegirArmoniaMobile("triada")}>Tríada</button>
+                      <button onClick={() => elegirArmoniaMobile("cuadrada")}>Cuadrada</button>
+                      <button onClick={() => elegirArmoniaMobile("monocromatica")}>Monocromática</button>
+                      <button onClick={() => elegirArmoniaMobile("sombras")}>Sombras</button>
+                    </div>
+                )}
+              </div>
+
+              <div className="mobile-dropdown">
+                <button className="mobile-barra" onClick={() => setMostrarDropdownFormato(!mostrarDropdownFormato)}>
+                  <span>{formatoActivo.toUpperCase()}</span>
+                  <span>▾</span>
+                </button>
+                {mostrarDropdownFormato && (
+                    <div className="mobile-dropdown-lista">
+                      <button onClick={() => elegirFormatoMobile("hsl")}>HSL</button>
+                      <button onClick={() => elegirFormatoMobile("hex")}>HEX</button>
+                      <button onClick={() => elegirFormatoMobile("rgb")}>RGB</button>
+                    </div>
+                )}
+
+                {formatoActivo === "hsl" && (
+                    <div className="campo-fila mobile-campo-fila">
+                      <input className="campo-numero" type="number" min={0} max={360} value={hueActivo} onChange={(e) => moverHueManual(Number(e.target.value))} />
+                      <input className="campo-numero" type="number" min={0} max={100} value={saturationActiva} onChange={(e) => moverSaturationManual(Number(e.target.value))} />
+                      <input className="campo-numero" type="number" min={0} max={100} value={lightnessActiva} onChange={(e) => moverLightness(Number(e.target.value))} />
+                    </div>
+                )}
+
+                {formatoActivo === "hex" && (
+                    <div className="mobile-campo-fila">
+                      <HexInput
+                          key={`${selectorActivo}-${hueActivo}-${saturationActiva}-${lightnessActiva}`}
+                          valorInicial={`#${hexActivo}`}
+                          onAplicar={aplicarColorManual}
+                      />
+                    </div>
+                )}
+
+                {formatoActivo === "rgb" && (
+                    <div className="campo-fila mobile-campo-fila">
+                      <input className="campo-numero" type="number" min={0} max={255} value={rgbActivo.r} onChange={(e) => moverRgbCampo("r", Number(e.target.value))} />
+                      <input className="campo-numero" type="number" min={0} max={255} value={rgbActivo.g} onChange={(e) => moverRgbCampo("g", Number(e.target.value))} />
+                      <input className="campo-numero" type="number" min={0} max={255} value={rgbActivo.b} onChange={(e) => moverRgbCampo("b", Number(e.target.value))} />
+                    </div>
+                )}
+              </div>
+
+              <button className="mobile-barra mobile-barra-code" onClick={() => setMostrarPopupCode(true)}>
+                <span className="panel-dev-icono">{"</>"}</span>
+                <span>Copy Code</span>
+              </button>
+            </div>
+
           </div>
 
         </div>
+
+        {mostrarPopupCode && (
+            <div className="popup-overlay" onClick={() => setMostrarPopupCode(false)}>
+              <div className="popup-caja" onClick={(e) => e.stopPropagation()}>
+                <div className="popup-header">
+                  <span>{"</>"} Code</span>
+                  <button onClick={() => setMostrarPopupCode(false)}>✕</button>
+                </div>
+                <pre className="panel-dev-codigo">{textoExport}</pre>
+                <button className="boton-copiar-todo" onClick={() => copiar(textoExport)}>Copiar todo</button>
+              </div>
+            </div>
+        )}
       </div>
   );
 }
