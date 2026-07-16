@@ -19,3 +19,8 @@
   touch-action: none;
   cursor: grab;
 }
+
+.color-wheel-marcador.bloqueado {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

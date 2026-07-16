@@ -12,8 +12,8 @@ import {
   getSplitComplementary,
   getTriad,
   getSquare,
-  getMonochromatic,
   getShades,
+  getTints,
   buildExportBlock,
 } from "./utils/color.js";
 import "./App.css";
@@ -72,14 +72,32 @@ export default function App() {
   // Aplica la armonía elegida usando COMO MAESTRO el selector que se movió
   // (indiceMovido, cualquiera de los 5) y reparte el resultado en los otros 4.
   function aplicarArmonia(tipoArmonia, indiceMovido, h, s, l) {
+    // Sombras, Tintes y Monocromática no siguen el esquema genérico de abajo:
+    // el maestro se queda en su posición real (indiceMovido) y los otros 4
+    // dependen de la DISTANCIA de posición a ese maestro, así que se calculan
+    // aparte. Monocromática usa la misma fórmula que Sombras (hacia el negro),
+    // pero ColorWheel.jsx bloquea el arrastre de los selectores 2 a 5 en ese
+    // modo, así que indiceMovido siempre termina siendo 1.
+    if (tipoArmonia === "sombras" || tipoArmonia === "tintes" || tipoArmonia === "monocromatica") {
+      const resultado =
+          tipoArmonia === "tintes"
+              ? getTints(h, s, l, indiceMovido)
+              : getShades(h, s, l, indiceMovido);
+
+      if (indiceMovido !== 1) { setHue1(resultado[0].h); setSaturation1(resultado[0].s); setLightness1(resultado[0].l); }
+      if (indiceMovido !== 2) { setHue2(resultado[1].h); setSaturation2(resultado[1].s); setLightness2(resultado[1].l); }
+      if (indiceMovido !== 3) { setHue3(resultado[2].h); setSaturation3(resultado[2].s); setLightness3(resultado[2].l); }
+      if (indiceMovido !== 4) { setHue4(resultado[3].h); setSaturation4(resultado[3].s); setLightness4(resultado[3].l); }
+      if (indiceMovido !== 5) { setHue5(resultado[4].h); setSaturation5(resultado[4].s); setLightness5(resultado[4].l); }
+      return;
+    }
+
     let resultado;
     if (tipoArmonia === "analoga") resultado = getAnalogous(h, s, l);
     else if (tipoArmonia === "complementaria") resultado = getComplementary(h, s, l);
     else if (tipoArmonia === "dividida") resultado = getSplitComplementary(h, s, l);
     else if (tipoArmonia === "triada") resultado = getTriad(h, s, l);
     else if (tipoArmonia === "cuadrada") resultado = getSquare(h, s, l);
-    else if (tipoArmonia === "monocromatica") resultado = getMonochromatic(h, s, l);
-    else if (tipoArmonia === "sombras") resultado = getShades(h, s, l);
     else return;
 
     if (indiceMovido === 1) {
@@ -218,6 +236,7 @@ export default function App() {
     if (valor === "triada") return "Tríada";
     if (valor === "cuadrada") return "Cuadrada";
     if (valor === "monocromatica") return "Monocromática";
+    if (valor === "tintes") return "Tintes";
     return "Sombras";
   }
 
@@ -383,6 +402,7 @@ export default function App() {
                       <button onClick={() => elegirArmoniaMobile("cuadrada")}>Cuadrada</button>
                       <button onClick={() => elegirArmoniaMobile("monocromatica")}>Monocromática</button>
                       <button onClick={() => elegirArmoniaMobile("sombras")}>Sombras</button>
+                      <button onClick={() => elegirArmoniaMobile("tintes")}>Tintes</button>
                     </div>
                 )}
               </div>

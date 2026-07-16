@@ -83,24 +83,48 @@ export function getSquare(h, s, l) {
   ];
 }
 
-export function getMonochromatic(h, s, l) {
-  return [
-    { h, s, l: 15 },
-    { h, s, l: 35 },
-    { h, s, l: 50 },
-    { h, s, l: 70 },
-    { h, s, l: 90 },
-  ];
+// Sombras: el maestro se queda en su posición (posicionMaestro, de 1 a 5) y
+// los otros 4 se oscurecen hacia el negro según qué tan lejos están de él.
+// El oscurecimiento es proporcional al espacio real disponible (l - piso),
+// no un número fijo, así nunca chocan dos colores en el mismo piso.
+// Devuelve un array indexado directo por posición: resultado[0] = Color 1, ..., resultado[4] = Color 5.
+// Monocromática usa esta misma función con posicionMaestro fijo en 1 (App.jsx
+// bloquea el arrastre de los selectores 2 a 5 en ese modo).
+export function getShades(h, s, l, posicionMaestro) {
+  const piso = 5;
+  const espacio = Math.max(l - piso, 0);
+  const distanciaMaxima = Math.max(posicionMaestro - 1, 5 - posicionMaestro);
+  const paso = distanciaMaxima > 0 ? espacio / distanciaMaxima : 0;
+
+  const resultado = [];
+  for (let posicion = 1; posicion <= 5; posicion++) {
+    if (posicion === posicionMaestro) {
+      resultado.push({ h, s, l });
+    } else {
+      const distancia = Math.abs(posicion - posicionMaestro);
+      resultado.push({ h, s, l: Math.max(l - distancia * paso, piso) });
+    }
+  }
+  return resultado;
 }
 
-export function getShades(h, s, l) {
-  return [
-    { h, s, l: Math.max(l - 40, 5) },
-    { h, s, l },
-    { h, s, l: Math.max(l - 10, 5) },
-    { h, s, l: Math.max(l - 20, 5) },
-    { h, s, l: Math.max(l - 30, 5) },
-  ];
+// Tintes: mismo patrón que Sombras, pero aclarando hacia el blanco.
+export function getTints(h, s, l, posicionMaestro) {
+  const techo = 95;
+  const espacio = Math.max(techo - l, 0);
+  const distanciaMaxima = Math.max(posicionMaestro - 1, 5 - posicionMaestro);
+  const paso = distanciaMaxima > 0 ? espacio / distanciaMaxima : 0;
+
+  const resultado = [];
+  for (let posicion = 1; posicion <= 5; posicion++) {
+    if (posicion === posicionMaestro) {
+      resultado.push({ h, s, l });
+    } else {
+      const distancia = Math.abs(posicion - posicionMaestro);
+      resultado.push({ h, s, l: Math.min(l + distancia * paso, techo) });
+    }
+  }
+  return resultado;
 }
 
 // Convierte HSL a un objeto {r, g, b} (0-255 cada uno), reusando hslToHex.

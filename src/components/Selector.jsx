@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Selector.css";
 
-export default function Selector({ ruedaRef, hue, saturation, lightness, onMove }) {
+export default function Selector({ ruedaRef, hue, saturation, lightness, onMove, bloqueado = false }) {
 
   // Estado LOCAL, solo de este selector puntual: ¿me están arrastrando ahora mismo?
   const [arrastrando, setArrastrando] = useState(false);
@@ -36,6 +36,7 @@ export default function Selector({ ruedaRef, hue, saturation, lightness, onMove 
   }
 
   function handlePointerDown(e) {
+    if (bloqueado) return;
     e.currentTarget.setPointerCapture(e.pointerId);
     setArrastrando(true);
     calcularAngulo(e);
@@ -71,7 +72,7 @@ export default function Selector({ ruedaRef, hue, saturation, lightness, onMove 
         )}
 
         <div
-            className="color-wheel-marcador"
+            className={bloqueado ? "color-wheel-marcador bloqueado" : "color-wheel-marcador"}
             style={{
               left: `${left}%`,
               top: `${top}%`,

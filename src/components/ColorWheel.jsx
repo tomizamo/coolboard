@@ -26,10 +26,10 @@ export default function SelectAngle({
           />
 
           <Selector ruedaRef={ruedaRef} hue={hue1} saturation={saturation1} lightness={lightness1} onMove={onMoverSelector1} />
-          <Selector ruedaRef={ruedaRef} hue={hue2} saturation={saturation2} lightness={lightness2} onMove={onMoverSelector2} />
-          <Selector ruedaRef={ruedaRef} hue={hue3} saturation={saturation3} lightness={lightness3} onMove={onMoverSelector3} />
-          <Selector ruedaRef={ruedaRef} hue={hue4} saturation={saturation4} lightness={lightness4} onMove={onMoverSelector4} />
-          <Selector ruedaRef={ruedaRef} hue={hue5} saturation={saturation5} lightness={lightness5} onMove={onMoverSelector5} />
+          <Selector ruedaRef={ruedaRef} hue={hue2} saturation={saturation2} lightness={lightness2} onMove={onMoverSelector2} bloqueado={armonia === "monocromatica"} />
+          <Selector ruedaRef={ruedaRef} hue={hue3} saturation={saturation3} lightness={lightness3} onMove={onMoverSelector3} bloqueado={armonia === "monocromatica"} />
+          <Selector ruedaRef={ruedaRef} hue={hue4} saturation={saturation4} lightness={lightness4} onMove={onMoverSelector4} bloqueado={armonia === "monocromatica"} />
+          <Selector ruedaRef={ruedaRef} hue={hue5} saturation={saturation5} lightness={lightness5} onMove={onMoverSelector5} bloqueado={armonia === "monocromatica"} />
         </div>
 
         <input
@@ -50,6 +50,7 @@ export default function SelectAngle({
           <button className={armonia === "cuadrada" ? "armonia-boton activo" : "armonia-boton"} onClick={() => onArmoniaChange("cuadrada")}>Cuadrada</button>
           <button className={armonia === "monocromatica" ? "armonia-boton activo" : "armonia-boton"} onClick={() => onArmoniaChange("monocromatica")}>Monocromática</button>
           <button className={armonia === "sombras" ? "armonia-boton activo" : "armonia-boton"} onClick={() => onArmoniaChange("sombras")}>Sombras</button>
+          <button className={armonia === "tintes" ? "armonia-boton activo" : "armonia-boton"} onClick={() => onArmoniaChange("tintes")}>Tintes</button>
         </div>
       </div>
   );
