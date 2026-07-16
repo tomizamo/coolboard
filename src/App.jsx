@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SelectAngle from "./components/ColorWheel.jsx";
 import HexInput from "./components/HexInput.jsx";
+import Wireframe from "./wireframe/Wireframe.jsx";
 import {
   hslToHex,
   hslToRgb,
@@ -19,6 +20,8 @@ import {
 import "./App.css";
 
 export default function App() {
+
+  const [vista, setVista] = useState("colores");
 
   const [hue1, setHue1] = useState(0);
   const [saturation1, setSaturation1] = useState(100);
@@ -283,8 +286,25 @@ export default function App() {
 
         <nav className="navbar">
           <span className="navbar-logo">coolboard</span>
+          <div className="navbar-tabs">
+            <button
+                className={vista === "colores" ? "navbar-tab activa" : "navbar-tab"}
+                onClick={() => setVista("colores")}
+            >
+              Paleta de colores
+            </button>
+            <button
+                className={vista === "wireframe" ? "navbar-tab activa" : "navbar-tab"}
+                onClick={() => setVista("wireframe")}
+            >
+              Bosquejador
+            </button>
+          </div>
         </nav>
 
+        {vista === "wireframe" && <Wireframe />}
+
+        {vista === "colores" && (
         <div className="layout">
 
           <div className="grilla">
@@ -456,6 +476,7 @@ export default function App() {
           </div>
 
         </div>
+        )}
 
         {mostrarPopupCode && (
             <div className="popup-overlay" onClick={() => setMostrarPopupCode(false)}>

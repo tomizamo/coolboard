@@ -1,0 +1,277 @@
+.wireframe {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+/* Paleta -------------------------------------------------------------- */
+.wireframe-paleta {
+  width: 180px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: #16161b;
+  border-right: 1px solid #232328;
+  overflow-y: auto;
+}
+
+.wf-paleta-hojas {
+  margin-top: 10px;
+}
+
+.wireframe-chip {
+  font-weight: 700;
+  font-size: 13px;
+  color: #ffffff;
+  background: #232328;
+  border: 1px solid #2f2f36;
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: grab;
+  text-align: center;
+}
+
+.wireframe-chip:active {
+  cursor: grabbing;
+}
+
+.wireframe-chip-cont {
+  background: rgba(124, 92, 255, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Lienzo -------------------------------------------------------------- */
+.wireframe-lienzo {
+  flex: 1;
+  padding: 24px;
+  overflow: auto;
+}
+
+.wireframe-vacio {
+  color: #6f6f78;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Contenedores y hojas: se ven como cajas-placeholder de wireframe. */
+.wf-cont {
+  box-sizing: border-box;
+  min-width: 40px;
+  min-height: 48px;
+  padding: 8px;
+  border: 1px dashed #3a3a44;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.wf-caja {
+  box-sizing: border-box;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: #cfcfd6;
+  background: #26262d;
+  border: 1px solid #34343d;
+  border-radius: 8px;
+  padding: 8px 14px;
+}
+
+.wf-cont.seleccionado,
+.wf-caja.seleccionado {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.wf-hint {
+  color: #55555f;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Panel derecho ------------------------------------------------------- */
+.wireframe-panel {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: #16161b;
+  border-left: 1px solid #232328;
+  overflow-y: auto;
+}
+
+.wf-props {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.wf-prop-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #8b8b95;
+  margin-top: 8px;
+}
+
+.wf-botones {
+  display: flex;
+  gap: 6px;
+}
+
+.wf-btn {
+  flex: 1;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: #cfcfd6;
+  background: #232328;
+  border: 1px solid #2f2f36;
+  border-radius: 7px;
+  padding: 7px 4px;
+  cursor: pointer;
+}
+
+.wf-btn.activo {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+.wf-iconos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.wf-icono-btn {
+  background: #232328;
+  border: 1px solid #2f2f36;
+  border-radius: 7px;
+  padding: 6px;
+  cursor: pointer;
+  color: #9c9ca6;
+}
+
+.wf-icono-btn.activo {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(124, 92, 255, 0.12);
+}
+
+.mini-icono {
+  display: flex;
+  width: 34px;
+  height: 22px;
+  gap: 2px;
+}
+
+.mini-icono span {
+  width: 5px;
+  background: currentColor;
+  border-radius: 1px;
+}
+
+.wf-num {
+  box-sizing: border-box;
+  width: 100%;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  background: #232328;
+  border: 1px solid #2f2f36;
+  border-radius: 6px;
+  padding: 6px 8px;
+  text-align: center;
+}
+
+.wf-num:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.wf-borrar {
+  margin-top: 12px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ff8080;
+  background: rgba(255, 80, 80, 0.1);
+  border: 1px solid rgba(255, 80, 80, 0.3);
+  border-radius: 7px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.wf-css-header {
+  margin-top: 8px;
+}
+
+/* Calculadora de clamp() ---------------------------------------------- */
+.wf-clamp {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  background: #1a1a20;
+  border: 1px solid #2a2a31;
+  border-radius: 8px;
+}
+
+.wf-clamp-fila {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wf-clamp-tag {
+  width: 34px;
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: #8b8b95;
+}
+
+.wf-clamp-unidad {
+  width: 20px;
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: #6f6f78;
+}
+
+.wf-select {
+  flex-shrink: 0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  background: #232328;
+  border: 1px solid #2f2f36;
+  border-radius: 6px;
+  padding: 5px 4px;
+}
+
+.wf-clamp-preview {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 10px;
+  color: var(--accent);
+  word-break: break-all;
+}
+
+.wf-aviso {
+  font-size: 11px;
+  font-weight: 600;
+  color: #d8a24a;
+  line-height: 1.35;
+}
